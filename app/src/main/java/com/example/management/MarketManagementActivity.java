@@ -19,6 +19,14 @@ public class MarketManagementActivity extends AppCompatActivity {
         Button buttonSaveListings = findViewById(R.id.buttonSaveListings);
         Button buttonPurchasedListings = findViewById(R.id.buttonPurchasedListings);
 
+        Button buttonBack = findViewById(R.id.backButton);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         // Set onClick listeners for each button
         buttonManageListings.setOnClickListener(new View.OnClickListener() {
             @Override

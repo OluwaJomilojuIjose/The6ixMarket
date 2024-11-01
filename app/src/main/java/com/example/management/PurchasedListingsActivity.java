@@ -1,6 +1,8 @@
 package com.example.management;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +22,14 @@ public class PurchasedListingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_purchased_listings);
 
         listView = findViewById(R.id.listView);
+
+        Button buttonBack = findViewById(R.id.backButton);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // Sample data; in a real app, you'd fetch this from a database
         purchasedListings = new ArrayList<>();

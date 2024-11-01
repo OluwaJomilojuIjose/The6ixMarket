@@ -25,6 +25,14 @@ public class ManageListingsActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         Button buttonAddListing = findViewById(R.id.buttonAddListing);
 
+        Button buttonBack = findViewById(R.id.backButton);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         // Sample data; in a real app, you'd fetch this from a database
         listings = new ArrayList<>();
         listings.add(new Listing("Item 1", "Description 1", 10.0));

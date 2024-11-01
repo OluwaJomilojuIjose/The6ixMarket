@@ -28,6 +28,14 @@ public class AddEditListingActivity extends AppCompatActivity {
         editTextPrice = findViewById(R.id.editTextPrice);
         buttonSave = findViewById(R.id.buttonSave);
 
+        Button buttonBack = findViewById(R.id.backButton);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         // Check if we are editing an existing listing
         if (getIntent().hasExtra("listing")) {
             listing = (Listing) getIntent().getSerializableExtra("listing");
