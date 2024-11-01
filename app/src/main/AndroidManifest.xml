@@ -21,6 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AccountManagementActivity" />
+        <activity android:name=".MarketManagementActivity" />
+        <activity android:name=".AddEditListingActivity" />
+        <activity android:name=".ManageListingsActivity" />
+        <activity android:name=".SavedListingsActivity" />
+        <activity android:name=".PurchasedListingsActivity" />
+        <activity android:name=".ListingAdapter" />
+
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
