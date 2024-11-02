@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.afinal.ui.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_accountManagementFragment"
+            app:destination="@id/accountManagementFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_marketManagementFragment"
+            app:destination="@id/marketManagementFragment" />
+    </fragment>
+
+    <!-- Account Management Fragment -->
+    <fragment
+        android:id="@+id/accountManagementFragment"
+        android:name="com.example.afinal.ui.AccountManagementFragment"
+        android:label="Account Management"
+        tools:layout="@layout/fragment_account_management" />
+
+    <!-- Market Management Fragment -->
+    <fragment
+        android:id="@+id/marketManagementFragment"
+        android:name="com.example.afinal.ui.MarketManagementFragment"
+        android:label="Market Management"
+        tools:layout="@layout/fragment_market_management">
+
+        <!-- Added navigation to manage listings fragment -->
+        <action
+            android:id="@+id/action_marketManagementFragment_to_manageListingsFragment"
+            app:destination="@id/manageListingsFragment" />
+    </fragment>
+
+    <!-- Manage Listings Fragment -->
+    <fragment
+        android:id="@+id/manageListingsFragment"
+        android:name="com.example.afinal.ui.ManageListingsFragment"
+        android:label="Manage Listings"
+        tools:layout="@layout/fragment_manage_listings">
+
+        <!-- Added navigation to add product fragment -->
+        <action
+            android:id="@+id/action_manageListingsFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+    </fragment>
+
+    <!-- Add Product Fragment -->
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.example.afinal.ui.AddProductFragment"
+        android:label="Add Product"
+        tools:layout="@layout/fragment_add_product">
+
+        <!-- Navigate to HomeFragment after adding product -->
+        <action
+            android:id="@+id/action_addProductFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <!-- First Fragment -->
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.afinal.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+
+    <!-- Second Fragment -->
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.afinal.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <!-- Search Fragment -->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.afinal.ui.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
+</navigation>
