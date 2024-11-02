@@ -27,4 +27,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAccountManagement" /> <!-- Constrain below the first button -->
 
+    <Button
+        android:id="@+id/buttonTestCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Test Camera"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMarketManagement" /> <!-- Constrain below the second button -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

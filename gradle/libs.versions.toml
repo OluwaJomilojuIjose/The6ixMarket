@@ -18,6 +18,11 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
+camerax-core = "androidx.camera:camera-core:1.4.0"
+camerax-camera2 = "androidx.camera:camera-camera2:1.4.0"
+camerax-lifecycle = "androidx.camera:camera-lifecycle:1.4.0"
+camerax-view = "androidx.camera:camera-view:1.4.0"
+camerax-extensions = "androidx.camera:camera-extensions:1.4.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

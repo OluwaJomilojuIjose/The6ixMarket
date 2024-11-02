@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize the button
         Button buttonAccountManagement = findViewById(R.id.buttonAccountManagement);
         Button buttonMarketManagement = findViewById(R.id.buttonMarketManagement);
+        Button buttonTestCamera = findViewById(R.id.buttonTestCamera);
 
         // Set an OnClickListener to handle button clicks
         buttonAccountManagement.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MarketManagementActivity.class);
+                startActivity(intent); // Start the activity
+            }
+        });
+
+        buttonTestCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CameraSensorActivity.class);
                 startActivity(intent); // Start the activity
             }
         });
