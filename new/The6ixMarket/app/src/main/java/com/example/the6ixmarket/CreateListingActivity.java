@@ -39,8 +39,8 @@ public class CreateListingActivity extends AppCompatActivity {
         titleEditText = findViewById(R.id.title_edit_text);
         priceEditText = findViewById(R.id.price_edit_text);
         descriptionEditText = findViewById(R.id.description_edit_text);
-        countryEditText = findViewById(R.id.country_edit_text); // New field
-        postalCodeEditText = findViewById(R.id.postal_code_edit_text); // New field
+        countryEditText = findViewById(R.id.country_edit_text);
+        postalCodeEditText = findViewById(R.id.postal_code_edit_text);
         listingImageView = findViewById(R.id.listing_image_view);
         saveButton = findViewById(R.id.save_listing_button);
 
@@ -98,8 +98,8 @@ public class CreateListingActivity extends AppCompatActivity {
             String title = titleEditText.getText().toString().trim();
             String price = priceEditText.getText().toString().trim();
             String description = descriptionEditText.getText().toString().trim();
-            String country = countryEditText.getText().toString().trim(); // New field
-            String postalCode = postalCodeEditText.getText().toString().trim(); // New field
+            String country = countryEditText.getText().toString().trim();
+            String postalCode = postalCodeEditText.getText().toString().trim();
 
             if (title.isEmpty() || price.isEmpty() || selectedImageUri == null || country.isEmpty() || postalCode.isEmpty()) {
                 Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
@@ -117,8 +117,9 @@ public class CreateListingActivity extends AppCompatActivity {
         values.put(DatabaseHelper.COLUMN_IMAGE_URI, imageUri);
         values.put(DatabaseHelper.COLUMN_DESCRIPTION, description);
         values.put(DatabaseHelper.COLUMN_SELLER, "Seller Name"); // Replace with actual seller info
-        values.put(DatabaseHelper.COLUMN_COUNTRY, country); // New field
-        values.put(DatabaseHelper.COLUMN_POSTAL_CODE, postalCode); // New field
+        values.put(DatabaseHelper.COLUMN_COUNTRY, country);
+        values.put(DatabaseHelper.COLUMN_POSTAL_CODE, postalCode);
+        values.put(DatabaseHelper.COLUMN_STATUS, "active"); // Set status to active
 
         long newRowId = db.insert(DatabaseHelper.TABLE_LISTINGS, null, values);
         if (newRowId != -1) {

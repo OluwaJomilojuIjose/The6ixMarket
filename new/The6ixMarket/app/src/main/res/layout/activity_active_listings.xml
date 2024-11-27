@@ -1,83 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/create_listing_scroll_view"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/active_listings_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/create_listing_layout"
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/active_listings_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- Existing UI elements -->
+        android:layout_height="?attr/actionBarSize"
+        android:background="#0083FC"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <!-- Title -->
-        <EditText
-            android:id="@+id/title_edit_text"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/active_listings_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Title"
-            android:inputType="text"
-            android:background="#B3D9FF"
-            android:textColor="#000000" />
-
-        <!-- Price -->
-        <EditText
-            android:id="@+id/price_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Price"
-            android:inputType="numberDecimal"
-            android:background="#B3D9FF"
-            android:textColor="#000000" />
-
-        <!-- Description -->
-        <EditText
-            android:id="@+id/description_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description"
-            android:inputType="textMultiLine"
-            android:lines="3"
-            android:gravity="top"
-            android:background="#B3D9FF"
-            android:textColor="#000000" />
-
-        <!-- Country -->
-        <EditText
-            android:id="@+id/country_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Country"
-            android:inputType="text"
-            android:background="#B3D9FF"
-            android:textColor="#000000" />
-
-        <!-- Postal Code -->
-        <EditText
-            android:id="@+id/postal_code_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Postal Code"
-            android:inputType="text"
-            android:background="#B3D9FF"
-            android:textColor="#000000" />
-
-        <!-- ImageView and Buttons -->
-        <!-- ... existing code for image and buttons ... -->
-
-        <!-- Save Button -->
-        <Button
-            android:id="@+id/save_listing_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Listing"
+            android:text="Active Listings"
             android:textColor="#FFFFFF"
-            android:background="#0083FC"
-            android:layout_marginTop="16dp" />
+            android:textSize="20sp"
+            android:layout_gravity="center" />
+    </androidx.appcompat.widget.Toolbar>
 
-    </LinearLayout>
-</ScrollView>
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/active_listings_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

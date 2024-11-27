@@ -34,10 +34,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = itemList.get(position);
+
         holder.titleTextView.setText(item.getTitle());
         holder.priceTextView.setText(item.getPrice());
-        holder.countryTextView.setText(item.getCountry()); // New
-        holder.postalCodeTextView.setText(item.getPostalCode()); // New
+        holder.countryTextView.setText(item.getCountry());
+        holder.postalCodeTextView.setText(item.getPostalCode());
 
         Log.d("ItemAdapter", "Binding item at position " + position + ": " + item.getTitle());
 
@@ -54,13 +55,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ItemDetailActivity.class);
+            intent.putExtra("ITEM_ID", item.getId()); // Pass item ID
             intent.putExtra("ITEM_TITLE", item.getTitle());
             intent.putExtra("ITEM_DESCRIPTION", item.getDescription());
             intent.putExtra("ITEM_IMAGE", item.getImageUri());
             intent.putExtra("ITEM_PRICE", item.getPrice());
             intent.putExtra("ITEM_SELLER", item.getSeller());
-            intent.putExtra("ITEM_COUNTRY", item.getCountry()); // New
-            intent.putExtra("ITEM_POSTAL_CODE", item.getPostalCode()); // New
+            intent.putExtra("ITEM_COUNTRY", item.getCountry());
+            intent.putExtra("ITEM_POSTAL_CODE", item.getPostalCode());
+            intent.putExtra("ITEM_STATUS", item.getStatus()); // Pass status
             context.startActivity(intent);
         });
     }
@@ -78,8 +81,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.item_title);
             priceTextView = itemView.findViewById(R.id.item_price);
-            countryTextView = itemView.findViewById(R.id.item_country); // New
-            postalCodeTextView = itemView.findViewById(R.id.item_postal_code); // New
+            countryTextView = itemView.findViewById(R.id.item_country);
+            postalCodeTextView = itemView.findViewById(R.id.item_postal_code);
             imageView = itemView.findViewById(R.id.item_image);
         }
     }

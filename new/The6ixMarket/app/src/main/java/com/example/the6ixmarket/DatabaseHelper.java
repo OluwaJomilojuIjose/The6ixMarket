@@ -7,18 +7,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Market.db";
-    private static final int DATABASE_VERSION = 5; // Incremented from 4 to 5
+    private static final int DATABASE_VERSION = 6; // Incremented from 5 to 6
 
     // Listings table and columns
     public static final String TABLE_LISTINGS = "listings";
-    public static final String COLUMN_ID = "id"; // Added ID column constant
+    public static final String COLUMN_ID = "id";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_PRICE = "price";
     public static final String COLUMN_IMAGE_URI = "image_uri";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_SELLER = "seller";
-    public static final String COLUMN_COUNTRY = "country"; // New column
-    public static final String COLUMN_POSTAL_CODE = "postal_code"; // New column
+    public static final String COLUMN_COUNTRY = "country";
+    public static final String COLUMN_POSTAL_CODE = "postal_code";
+    public static final String COLUMN_STATUS = "status"; // New column
 
     // User table and columns
     public static final String TABLE_USER = "user";
@@ -38,8 +39,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_IMAGE_URI + " TEXT, "
                 + COLUMN_DESCRIPTION + " TEXT, "
                 + COLUMN_SELLER + " TEXT, "
-                + COLUMN_COUNTRY + " TEXT, " // New column
-                + COLUMN_POSTAL_CODE + " TEXT)"; // New column
+                + COLUMN_COUNTRY + " TEXT, "
+                + COLUMN_POSTAL_CODE + " TEXT, "
+                + COLUMN_STATUS + " TEXT)"; // New column
         db.execSQL(CREATE_LISTINGS_TABLE);
 
         String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + " ("

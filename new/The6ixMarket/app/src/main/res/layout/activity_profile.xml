@@ -27,12 +27,18 @@
         android:id="@+id/active_listings_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Active Listings" />
+        android:text="View Active Listings"
+        android:textColor="#FFFFFF"
+        android:background="#0083FC"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/sold_listings_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sold Listings" />
+        android:text="View Sold Listings"
+        android:textColor="#FFFFFF"
+        android:background="#0083FC"
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>

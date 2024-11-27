@@ -90,7 +90,17 @@
             android:layout_height="wrap_content"
             android:text="Message Seller"
             android:textColor="#FFFFFF"
-            android:background="#0083FC" />
+            android:background="#0083FC"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Mark as Sold Button -->
+        <Button
+            android:id="@+id/mark_as_sold_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mark as Sold"
+            android:textColor="#FFFFFF"
+            android:background="#FF0000" />
 
     </LinearLayout>
 </ScrollView>
