@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MessagesActivity extends AppCompatActivity {
 
     private EditText messageInput;
-    private Button sendButton;
+    private Button sendButton, backButton;
     private ListView messageListView;
     private MessageAdapter messageAdapter;
     private ArrayList<Message> messageList;
@@ -42,6 +42,8 @@ public class MessagesActivity extends AppCompatActivity {
                 sendMessage();
             }
         });
+
+
     }
 
     private void sendMessage() {
