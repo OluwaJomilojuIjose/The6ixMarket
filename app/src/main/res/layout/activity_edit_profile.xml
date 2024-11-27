@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="0dp">
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -39,53 +41,45 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/name_label"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"
-        android:text="Name:"
-        android:textSize="18sp" />
+        android:layout_marginRight="20dp"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="173dp" />
 
-    <TextView
-        android:id="@+id/name_text_view"
+    <EditText
+        android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/email_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Email:"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/email_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="40dp"
-        android:textSize="16sp" />
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="227dp" />
 
     <Button
-        android:id="@+id/edit_profile_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Profile Details"
-        android:layout_gravity="center"
-        android:padding="12dp"
-        android:textSize="16sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
         android:backgroundTint="#0083FC"
-        android:textColor="@android:color/white" />
+        android:padding="12dp"
+        android:text="Save"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="340dp" />
 
     <ImageView
         android:id="@+id/imageView2"
