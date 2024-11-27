@@ -1,0 +1,198 @@
+[
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/xml_backup_rules.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_logo.png.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/logo.png"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_profile_details.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_profile_details.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_bg_message_sent.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/bg_message_sent.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_item_detail.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_item_detail.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_item3_image.jpg.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/item3_image.jpg"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_item6_image.jpg.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/item6_image.jpg"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_chat.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_chat.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_register.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_item5_image.jpg.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/item5_image.jpg"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_item2_image.jpg.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/item2_image.jpg"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_active_listings.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_active_listings.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_sold_listings.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_sold_listings.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_bg_message_received.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/bg_message_received.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_placeholder_image.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/placeholder_image.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_baseline_arrow_back_ios_24.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/baseline_arrow_back_ios_24.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_profile.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_profile.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_ic_gallery.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/ic_gallery.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_ic_camera.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/ic_camera.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_item_message_received.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/item_message_received.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_item1_image.jpg.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/item1_image.jpg"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_item4_image.jpg.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/item4_image.jpg"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_item_message_sent.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/item_message_sent.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_item_layout.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/item_layout.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_login.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_messages.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_messages.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_bg_edittext.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/bg_edittext.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_item7_image.jpg.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/item7_image.jpg"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_item_message.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/item_message.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_main.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/drawable_ic_profile.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/drawable/ic_profile.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_item_conversation.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/item_conversation.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_edit_profile.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_edit_profile.xml"
+    },
+    {
+        "merged": "com.example.the6ixmarket.app-debug-40:/layout_activity_create_listing.xml.flat",
+        "source": "com.example.the6ixmarket.app-main-42:/layout/activity_create_listing.xml"
+    }
+]
