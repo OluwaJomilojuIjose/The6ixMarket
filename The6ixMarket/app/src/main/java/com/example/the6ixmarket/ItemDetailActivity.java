@@ -90,7 +90,9 @@ public class ItemDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Redirect to MainActivity
-                Intent intent = new Intent(ItemDetailActivity.this, MainActivity.class);
+                Intent intent = new Intent(ItemDetailActivity.this, MessagingActivity.class);
+                intent.putExtra("ITEM_TITLE", title);
+                intent.putExtra("SELLER_NAME", seller);
                 startActivity(intent);
             }
         });
