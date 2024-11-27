@@ -11,13 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="412dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#0083FC"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <!-- Container for Toolbar Items -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <!-- App Title -->
+                <TextView
+                    android:id="@+id/profile_title"
+                    android:layout_width="393dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:paddingStart="16dp"
+                    android:text="The 6ix Market"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
 
         <!-- Item Image -->
         <ImageView
             android:id="@+id/item_detail_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
             android:scaleType="centerCrop"
             android:src="@drawable/placeholder_image"
             android:layout_marginBottom="16dp" />
@@ -27,6 +58,9 @@
             android:id="@+id/item_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
             android:text="Item Title"
             android:textColor="#000000"
             android:textSize="20sp"
@@ -38,6 +72,9 @@
             android:id="@+id/item_detail_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="$0.00"
             android:textColor="#000000"
             android:textSize="18sp"
@@ -48,6 +85,9 @@
             android:id="@+id/item_detail_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="Item Description"
             android:textColor="#000000"
             android:textSize="16sp"
@@ -58,6 +98,9 @@
             android:id="@+id/item_detail_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="Country"
             android:textColor="#000000"
             android:textSize="16sp"
@@ -68,6 +111,9 @@
             android:id="@+id/item_detail_postal_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="Postal Code"
             android:textColor="#000000"
             android:textSize="16sp"
@@ -78,6 +124,9 @@
             android:id="@+id/item_detail_seller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="Seller Name"
             android:textColor="#000000"
             android:textSize="16sp"
@@ -88,9 +137,12 @@
             android:id="@+id/message_seller_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="Message Seller"
-            android:textColor="#FFFFFF"
-            android:background="#0083FC"
+            android:textColor="#000000"
+            android:backgroundTint="#B3D9FF"
             android:layout_marginBottom="8dp" />
 
         <!-- Mark as Sold Button -->
@@ -98,9 +150,25 @@
             android:id="@+id/mark_as_sold_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:text="Mark as Sold"
-            android:textColor="#FFFFFF"
-            android:background="#FF0000" />
+            android:textColor="#000000"
+            android:backgroundTint="#B3D9FF" />
 
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="bottom|right"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#B3D9FF"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:text="Back" />
     </LinearLayout>
 </ScrollView>

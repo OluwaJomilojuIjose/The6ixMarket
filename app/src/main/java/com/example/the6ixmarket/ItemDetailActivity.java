@@ -19,7 +19,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     TextView itemTitleTextView, itemPriceTextView, itemDescriptionTextView, itemSellerTextView;
     ImageView itemImageView;
     Button messageSellerButton;
-    Button markAsSoldButton; // New button
+    Button markAsSoldButton, backButton; // New button
 
     TextView itemCountryTextView, itemPostalCodeTextView;
 
@@ -86,6 +86,14 @@ public class ItemDetailActivity extends AppCompatActivity {
         // Mark as Sold button listener
         markAsSoldButton.setOnClickListener(view -> {
             markListingAsSold(itemId);
+        });
+
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
     }
 
