@@ -19,6 +19,7 @@ public class ProfileActivity extends AppCompatActivity {
         Button messagesButton = findViewById(R.id.messages_button);
         Button activeListingsButton = findViewById(R.id.active_listings_button);
         Button soldListingsButton = findViewById(R.id.sold_listings_button);
+        Button backButton = findViewById(R.id.back_button);
 
         profileDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,13 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, SoldListingsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

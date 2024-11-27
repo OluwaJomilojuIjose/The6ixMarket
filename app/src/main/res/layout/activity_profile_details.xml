@@ -28,7 +28,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:paddingStart="16dp"
-                android:text="The 6ix Market"
+                android:text="Profile Details"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
@@ -84,8 +84,8 @@
         android:layout_gravity="center"
         android:padding="12dp"
         android:textSize="16sp"
-        android:backgroundTint="#0083FC"
-        android:textColor="@android:color/white" />
+        android:backgroundTint="#B3D9FF"
+        android:textColor="#000000" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -104,8 +104,10 @@
         android:layout_marginTop="60dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
+        android:backgroundTint="#B3D9FF"
+        android:textColor="#000000"
         android:gravity="center"
-        android:backgroundTint="#0083FC"
-        android:text="Back" />
+        android:text="Back"
+         />
 
 </LinearLayout>
