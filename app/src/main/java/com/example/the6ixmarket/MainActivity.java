@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,16 +35,32 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Item> itemList;
     ArrayList<Item> filteredList;
 
+    FirebaseAuth auth;
+    FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize FirebaseAuth and check user authentication
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
         logoutButton = findViewById(R.id.logout);
         profileButton = findViewById(R.id.profile_button);
         userDetails = findViewById(R.id.user_details);
         recyclerView = findViewById(R.id.recycler_view);
         searchBar = findViewById(R.id.search_bar);
+
+        // If user is not logged in, redirect to Login activity
+        if (user == null) {
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+            finish();
+        } else {
+            userDetails.setText(user.getEmail()); // Show user's email
+        }
 
         databaseHelper = new DatabaseHelper(this);
 
@@ -52,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(itemAdapter);
 
+        // Set up search functionality
         searchBar.addTextChangedListener(new TextWatcher() {
-            // ... existing code ...
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // No action needed
@@ -70,12 +89,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Handle logout button click
         logoutButton.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut(); // Sign out from Firebase
             Intent intent = new Intent(MainActivity.this, Login.class);
             startActivity(intent);
             finish();
         });
 
+        // Handle profile button click
         profileButton.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
@@ -99,20 +121,18 @@ public class MainActivity extends AppCompatActivity {
             if (cursor != null) {
                 Log.d(TAG, "Cursor count: " + cursor.getCount());
                 while (cursor.moveToNext()) {
-                    String id = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_ID));
                     String title = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_TITLE));
                     String price = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PRICE));
                     String imageUri = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_IMAGE_URI));
                     String description = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_DESCRIPTION));
                     String seller = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_SELLER));
-                    String country = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_COUNTRY));
-                    String postalCode = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_POSTAL_CODE));
-                    String status = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_STATUS));
+                    String country = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_COUNTRY)); // New
+                    String postalCode = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_POSTAL_CODE)); // New
 
                     if (description == null) description = "No description";
                     if (seller == null) seller = "Unknown Seller";
 
-                    Item item = new Item(id, title, description, imageUri, price, seller, country, postalCode, status);
+                    Item item = new Item(title, description, imageUri, price, seller, country, postalCode);
                     itemList.add(item);
 
                     Log.d(TAG, "Loaded item: " + title);

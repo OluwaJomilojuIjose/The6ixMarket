@@ -7,8 +7,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
-
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,9 +18,9 @@
         android:theme="@style/Theme.The6ixMarket"
         tools:targetApi="31">
 
-        <!-- MainActivity with launcher intent -->
+        <!-- Login activity with launcher intent -->
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,51 +28,38 @@
             </intent-filter>
         </activity>
 
-        <!-- Login and Register Activities -->
+        <!-- MainActivity -->
         <activity
-            android:name=".Login"
-            android:exported="false" />
+            android:name=".MainActivity"
+            android:exported="true" />
+
+        <!-- Register Activity -->
         <activity
             android:name=".Register"
             android:exported="false" />
 
-        <!-- Item Detail Page -->
+        <!-- Other activities -->
         <activity
             android:name=".ItemDetailActivity"
             android:exported="false" />
-
-        <!-- Profile Page -->
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
-
-        <!-- Create Listings Page -->
         <activity
             android:name=".CreateListingActivity"
             android:exported="false" />
-
-
-
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
-
-        <!-- Messages Page -->
         <activity
             android:name=".MessagesActivity"
             android:exported="false" />
-
-        <!-- Active Listings Page -->
         <activity
             android:name=".ActiveListingsActivity"
             android:exported="false" />
-
-        <!-- Sold Listings Page -->
         <activity
             android:name=".SoldListingsActivity"
             android:exported="false" />
-
-        <!-- Profile Details Page -->
         <activity
             android:name=".ProfileDetailsActivity"
             android:exported="false" />

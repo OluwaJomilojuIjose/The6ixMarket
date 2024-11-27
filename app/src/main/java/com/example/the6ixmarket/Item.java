@@ -23,6 +23,9 @@ public class Item {
         this.status = status;
     }
 
+    public Item(String title, String description, String imageUri, String price, String seller, String country, String postalCode) {
+    }
+
     // Getters
     public String getId() { return id; } // New getter
     public String getTitle() { return title; }
