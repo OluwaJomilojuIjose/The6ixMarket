@@ -8,7 +8,7 @@ public class ChatMessage {
     private Instant timestamp;
 
     public ChatMessage() {
-        // Default constructor required for Firebase
+
     }
 
     public ChatMessage(String sender, String message, Instant timestamp) {

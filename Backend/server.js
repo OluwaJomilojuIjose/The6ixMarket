@@ -19,20 +19,19 @@ db.connect((err) => {
     if (err) throw err;
     console.log('Connected to MySQL.');
 
-    // Ensure the database exists
+    // Create database if it doesn't exist
     db.query('CREATE DATABASE IF NOT EXISTS thesixmarket', (err, result) => {
         if (err) throw err;
         console.log('Database checked/created.');
 
-        // Switch to the thesixmarket database
         db.query('USE thesixmarket', (err) => {
             if (err) throw err;
             console.log('Using thesixmarket database.');
 
-            // Ensure the table exists
             const createTableQuery = `
             CREATE TABLE IF NOT EXISTS messages (
                 id INT AUTO_INCREMENT PRIMARY KEY,
+                chatParentId VARCHAR(255),
                 chatRoomId VARCHAR(255),
                 sender VARCHAR(255),
                 message TEXT,
@@ -49,9 +48,9 @@ db.connect((err) => {
 
 // POST route to send a message
 app.post('/messages', (req, res) => {
-    const { chatRoomId, sender, message } = req.body;
-    const query = 'INSERT INTO messages (chatRoomId, sender, message) VALUES (?, ?, ?)';
-    db.query(query, [chatRoomId, sender, message], (err, result) => {
+    const { chatParentId, chatRoomId, sender, message } = req.body;
+    const query = 'INSERT INTO messages (chatParentId, chatRoomId, sender, message) VALUES (?, ?, ?, ?)';
+    db.query(query, [chatParentId, chatRoomId, sender, message], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ success: false, message: 'Failed to send message.' });

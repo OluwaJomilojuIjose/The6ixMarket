@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -44,6 +45,7 @@ public class MessagingActivity extends AppCompatActivity {
     Button sendButton;
 
     String chatRoomId;
+    String chatParentId;
     String serverUrl = "http://10.0.2.2:3000"; // Use this IP for Android Emulator
 //    String serverUrl = "http://192.168.x.x:3000"; // Use this for Physical android device
 
@@ -57,39 +59,32 @@ public class MessagingActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
-        // Get data from intent
         String itemName = getIntent().getStringExtra("ITEM_TITLE");
         String sellerName = getIntent().getStringExtra("SELLER_NAME");
-        chatRoomId = itemName + "_" + sellerName + "_" + user.getDisplayName();
+        chatParentId = itemName + "_" + sellerName;
+        chatRoomId = chatParentId + "_" + user.getUid();
 
-        // Initialize UI components
         listViewMessages = findViewById(R.id.listViewMessages);
         inputMessage = findViewById(R.id.inputMessage);
         sendButton = findViewById(R.id.sendButton);
+        TextView itemTitle = findViewById(R.id.itemTitle);
+        itemTitle.setText(itemName);
 
-        // Initialize chat messages list and adapter
         chatMessages = new ArrayList<>();
         chatAdapter = new ChatAdapter(this, chatMessages);
         listViewMessages.setAdapter(chatAdapter);
 
-        // Initialize Volley request queue
         requestQueue = Volley.newRequestQueue(this);
-
-        // Load chat messages
         loadMessages();
 
-        // Send message
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = inputMessage.getText().toString().trim();
-                if (TextUtils.isEmpty(message)) {
-                    Toast.makeText(MessagingActivity.this, "Message cannot be empty", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                sendMessage(message);
-                inputMessage.setText("");
+        sendButton.setOnClickListener(v -> {
+            String message = inputMessage.getText().toString().trim();
+            if (TextUtils.isEmpty(message)) {
+                Toast.makeText(MessagingActivity.this, "Message cannot be empty", Toast.LENGTH_SHORT).show();
+                return;
             }
+            sendMessage(message);
+            inputMessage.setText("");
         });
     }
 
@@ -98,7 +93,7 @@ public class MessagingActivity extends AppCompatActivity {
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
                     chatMessages.clear();
-                    for (int i = 0; i < response.length(); i++) {
+                    for (int i = response.length()-1; i>=0; --i) {
                         try {
                             JSONObject obj = response.getJSONObject(i);
                             ChatMessage message = new ChatMessage(
@@ -126,6 +121,7 @@ public class MessagingActivity extends AppCompatActivity {
         String url = serverUrl + "/messages";
         JSONObject requestBody = new JSONObject();
         try {
+            requestBody.put("chatParentId", chatParentId);
             requestBody.put("chatRoomId", chatRoomId);
             requestBody.put("sender", user.getEmail());
             requestBody.put("message", message);
@@ -134,9 +130,7 @@ public class MessagingActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
-                response -> {
-                    loadMessages(); // Refresh messages after sending
-                },
+                response -> loadMessages(), // Refresh messages after sending
                 error -> Toast.makeText(MessagingActivity.this, "Failed to send message", Toast.LENGTH_SHORT).show());
 
         requestQueue.add(request);
