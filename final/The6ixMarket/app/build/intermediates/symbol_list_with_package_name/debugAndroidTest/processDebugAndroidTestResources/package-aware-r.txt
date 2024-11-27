@@ -1,3 +1,0 @@
-com.example.the6ixmarket.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

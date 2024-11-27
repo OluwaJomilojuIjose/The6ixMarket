@@ -1,5 +1,0 @@
-com.example.the6ixmarket.test.app-core-1.6.1-0 C:\Users\Sam\.gradle\caches\transforms-4\68d559324e5def48c577f1ce0f1fa0ff\transformed\core-1.6.1\res
-com.example.the6ixmarket.test.app-androidTest-1 C:\Users\Sam\Documents\The6ixMarket\app\build\generated\res\resValues\androidTest\debug
-com.example.the6ixmarket.test.app-mergeDebugAndroidTestResources-2 C:\Users\Sam\Documents\The6ixMarket\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.the6ixmarket.test.app-mergeDebugAndroidTestResources-3 C:\Users\Sam\Documents\The6ixMarket\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.the6ixmarket.test.app-debugAndroidTest-4 C:\Users\Sam\Documents\The6ixMarket\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
