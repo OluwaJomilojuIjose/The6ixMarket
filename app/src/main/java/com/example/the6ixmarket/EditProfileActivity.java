@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EditProfileActivity extends AppCompatActivity {
 
     private EditText editName, editEmail;
-    private Button saveButton;
+    private Button saveButton, backButton;
     private SQLiteDatabase database;
 
     @Override
@@ -31,6 +31,7 @@ public class EditProfileActivity extends AppCompatActivity {
         editName = findViewById(R.id.edit_name);
         editEmail = findViewById(R.id.edit_email);
         saveButton = findViewById(R.id.save_button);
+        backButton = findViewById(R.id.back_button);
 
         // Load existing user details
         loadUserDetails();
@@ -40,6 +41,13 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveUserDetails();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

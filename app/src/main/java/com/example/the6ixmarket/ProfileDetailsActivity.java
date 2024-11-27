@@ -14,7 +14,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
 
     private TextView nameTextView, emailTextView;
     private SQLiteDatabase database;
-    private Button editProfileButton;
+    private Button editProfileButton, backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         nameTextView = findViewById(R.id.name_text_view);
         emailTextView = findViewById(R.id.email_text_view);
         editProfileButton = findViewById(R.id.edit_profile_button); // Initialize button
+        backButton = findViewById(R.id.back_button);
 
         // Load user details for the first time
         loadUserDetails();
@@ -39,6 +40,13 @@ public class ProfileDetailsActivity extends AppCompatActivity {
                 // Navigate to EditProfileActivity
                 Intent intent = new Intent(ProfileDetailsActivity.this, EditProfileActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
