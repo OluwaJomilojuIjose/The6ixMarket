@@ -1,32 +1,26 @@
 package com.example.afinal.ui;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.example.afinal.R;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.afinal.database.UserRepository;
+import com.example.afinal.model.User;
 
 public class AccountManagementActivity extends AppCompatActivity {
 
     private EditText editTextName, editTextEmail, editTextPhone;
     private RadioGroup radioGroupUserType;
-    private String apiUrl = "http://yourserver.com/api/users";
-    private String userId = "exampleUserId";
+    private UserRepository userRepository;
+    private long userId = 1; // Mock user ID; replace with real logged-in user ID
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_management);
 
@@ -38,66 +32,52 @@ public class AccountManagementActivity extends AppCompatActivity {
         Button buttonSave = findViewById(R.id.buttonSave);
         Button buttonBack = findViewById(R.id.backButton);
 
-        // Set up back button listener
-        buttonBack.setOnClickListener(v -> finish());
+        // Initialize repository
+        userRepository = new UserRepository(this);
 
-        // Load existing user information
+        // Load user data
         loadUserInformation();
 
-        // Set up click listener for the save button
+        // Set listeners
         buttonSave.setOnClickListener(v -> saveUserInformation());
+        buttonBack.setOnClickListener(v -> finish());
     }
 
     private void loadUserInformation() {
-        String url = apiUrl + "/" + userId; // Construct the URL
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        // Populate fields with existing user data
-                        editTextName.setText(response.getString("name"));
-                        editTextEmail.setText(response.getString("email"));
-                        editTextPhone.setText(response.getString("phone"));
-                        String userType = response.getString("userType");
-                        if ("buyer".equals(userType)) {
-                            radioGroupUserType.check(R.id.radioButtonBuyer);
-                        } else {
-                            radioGroupUserType.check(R.id.radioButtonSeller);
-                        }
-                    } catch (JSONException e) {
-                        Toast.makeText(AccountManagementActivity.this, "Error parsing data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                },
-                error -> Toast.makeText(AccountManagementActivity.this, "Error loading user information: " + error.getMessage(), Toast.LENGTH_SHORT).show()
-        );
+        User user = userRepository.getUserById(userId);
+        if (user != null) {
+            editTextName.setText(user.getUsername());
+            editTextEmail.setText(user.getEmail());
+            editTextPhone.setText(user.getPhone());
 
-        requestQueue.add(jsonObjectRequest);
+            if ("buyer".equals(user.getUserType())) {
+                radioGroupUserType.check(R.id.radioButtonBuyer);
+            } else {
+                radioGroupUserType.check(R.id.radioButtonSeller);
+            }
+        } else {
+            Toast.makeText(this, "No user data found. Please set up your account.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void saveUserInformation() {
-        String name = editTextName.getText().toString();
-        String email = editTextEmail.getText().toString();
-        String phone = editTextPhone.getText().toString();
+        String name = editTextName.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
+        String phone = editTextPhone.getText().toString().trim();
         String userType = (radioGroupUserType.getCheckedRadioButtonId() == R.id.radioButtonBuyer) ? "buyer" : "seller";
 
-        JSONObject userJson = new JSONObject();
-        try {
-            userJson.put("name", name);
-            userJson.put("email", email);
-            userJson.put("phone", phone);
-            userJson.put("userType", userType);
-        } catch (JSONException e) {
-            Toast.makeText(this, "Error creating JSON: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        if (name.isEmpty() || email.isEmpty()) {
+            Toast.makeText(this, "Name and email are required.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String url = apiUrl + "/" + userId; // Construct the URL for update
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, userJson,
-                response -> Toast.makeText(AccountManagementActivity.this, "User information updated successfully.", Toast.LENGTH_SHORT).show(),
-                error -> Toast.makeText(AccountManagementActivity.this, "Error updating user information: " + error.getMessage(), Toast.LENGTH_SHORT).show()
-        );
+        User user = new User(userId, name, email, phone, userType);
+        long result = userRepository.insertUser(user);
 
-        requestQueue.add(jsonObjectRequest);
+        if (result != -1) {
+            Toast.makeText(this, "User information saved successfully.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Failed to save user information. Please try again.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

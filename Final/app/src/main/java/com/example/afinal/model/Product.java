@@ -36,7 +36,7 @@ public class Product implements Serializable {
         this.userId = userId;
     }
 
-
+    // Getters and Setters
     public long getId() { return id; }
     public String getName() { return name; }
     public double getPrice() { return price; }

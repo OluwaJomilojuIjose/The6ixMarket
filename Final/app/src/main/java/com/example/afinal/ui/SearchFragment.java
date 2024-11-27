@@ -6,9 +6,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.afinal.R;
 import com.example.afinal.database.ProductRepository;
 import com.example.afinal.model.Product;
-import com.example.afinal.ui.ProductAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,11 +32,10 @@ public class SearchFragment extends Fragment {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private ProductRepository productRepository;
-
     private List<Product> productList;
 
     public SearchFragment() {
-
+        // Required empty public constructor
     }
 
     @Nullable
@@ -45,13 +43,16 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
+        // Initialize views
         searchInput = view.findViewById(R.id.search_input);
         sortSpinner = view.findViewById(R.id.sort_spinner);
         recyclerView = view.findViewById(R.id.recycler_view);
 
-        productRepository = new ProductRepository(getContext());
+        // Initialize repository and data
+        productRepository = new ProductRepository(requireContext());
         productList = productRepository.getAllProducts();
 
+        // Set up RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         productAdapter = new ProductAdapter(productList);
         recyclerView.setAdapter(productAdapter);
@@ -101,13 +102,14 @@ public class SearchFragment extends Fragment {
 
     private void sortProductList(int position) {
         switch (position) {
-            case 0:  // Sort by price (low to high)
+            case 0: // Sort by price (low to high)
                 Collections.sort(productList, Comparator.comparingDouble(Product::getPrice));
                 break;
-            case 1:  // Sort by price (high to low)
+            case 1: // Sort by price (high to low)
                 Collections.sort(productList, (p1, p2) -> Double.compare(p2.getPrice(), p1.getPrice()));
                 break;
-
+            default:
+                break;
         }
         productAdapter.updateList(productList);
     }

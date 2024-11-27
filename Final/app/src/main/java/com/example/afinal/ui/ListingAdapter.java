@@ -4,55 +4,73 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.afinal.R;
 import com.example.afinal.model.Listing;
 
 import java.util.List;
 
-public class ListingAdapter extends ArrayAdapter<Listing> {
+public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingViewHolder> {
+
     private final Context context;
     private final List<Listing> listings;
+    private final OnItemClickListener listener;
 
-    public ListingAdapter(Context context, List<Listing> listings) {
-        super(context, 0, listings);
+    public interface OnItemClickListener {
+        void onItemClick(Listing listing);
+    }
+
+    public ListingAdapter(Context context, List<Listing> listings, OnItemClickListener listener) {
         this.context = context;
         this.listings = listings;
+        this.listener = listener;
+    }
+
+    @NonNull
+    @Override
+    public ListingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.listing_item, parent, false);
+        return new ListingViewHolder(view);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        Listing listing = getItem(position);
+    public void onBindViewHolder(@NonNull ListingViewHolder holder, int position) {
+        Listing listing = listings.get(position);
 
-        // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listing_item, parent, false);
+        holder.textViewTitle.setText(listing.getTitle());
+        holder.textViewDescription.setText(listing.getDescription());
+        holder.textViewPrice.setText(String.format("$%.2f", listing.getPrice()));
+
+        Glide.with(context)
+                .load(listing.getImageUrl())
+                .placeholder(R.drawable.placeholder_image)
+                .error(R.drawable.error_image)
+                .into(holder.imageViewProduct);
+
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(listing));
+    }
+
+    @Override
+    public int getItemCount() {
+        return listings.size();
+    }
+
+    static class ListingViewHolder extends RecyclerView.ViewHolder {
+        TextView textViewTitle, textViewDescription, textViewPrice;
+        ImageView imageViewProduct;
+
+        public ListingViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textViewTitle = itemView.findViewById(R.id.textViewTitle);
+            textViewDescription = itemView.findViewById(R.id.textViewDescription);
+            textViewPrice = itemView.findViewById(R.id.textViewPrice);
+            imageViewProduct = itemView.findViewById(R.id.product_image);
         }
-
-        // Lookup view for data population
-        TextView textViewTitle = convertView.findViewById(R.id.textViewTitle);
-        TextView textViewDescription = convertView.findViewById(R.id.textViewDescription);
-        TextView textViewPrice = convertView.findViewById(R.id.textViewPrice);
-        ImageView productImage = convertView.findViewById(R.id.product_image);
-
-        // Populate the data into the template view using the data object
-        textViewTitle.setText(listing.getTitle());
-        textViewDescription.setText(listing.getDescription());
-        textViewPrice.setText(String.format("$%.2f", listing.getPrice()));
-
-
-        Button contactSellerButton = convertView.findViewById(R.id.contact_seller_button);
-        contactSellerButton.setOnClickListener(v -> {
-
-        });
-
-        return convertView;
     }
 }

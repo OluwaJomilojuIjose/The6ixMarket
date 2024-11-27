@@ -2,8 +2,8 @@ package com.example.afinal.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.afinal.R;
@@ -21,25 +21,10 @@ public class MarketManagementActivity extends AppCompatActivity {
         Button buttonPurchasedListings = findViewById(R.id.buttonPurchasedListings);
         Button buttonBack = findViewById(R.id.backButton);
 
+        // Set up button listeners
+        buttonManageListings.setOnClickListener(v -> startActivity(new Intent(this, ManageListingsActivity.class)));
+        buttonSaveListings.setOnClickListener(v -> startActivity(new Intent(this, SavedListingsActivity.class)));
+        buttonPurchasedListings.setOnClickListener(v -> startActivity(new Intent(this, PurchasedListingsActivity.class)));
         buttonBack.setOnClickListener(v -> finish());
-
-        // Set onClick listeners for each button
-        buttonManageListings.setOnClickListener(v -> {
-            // Navigate to Manage Listings Activity
-            Intent intent = new Intent(MarketManagementActivity.this, ManageListingsActivity.class);
-            startActivity(intent);
-        });
-
-        buttonSaveListings.setOnClickListener(v -> {
-            // Navigate to Saved Listings Activity
-            Intent intent = new Intent(MarketManagementActivity.this, SavedListingsActivity.class);
-            startActivity(intent);
-        });
-
-        buttonPurchasedListings.setOnClickListener(v -> {
-            // Navigate to Purchased Listings Activity
-            Intent intent = new Intent(MarketManagementActivity.this, PurchasedListingsActivity.class);
-            startActivity(intent);
-        });
     }
 }

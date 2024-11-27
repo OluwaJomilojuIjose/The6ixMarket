@@ -15,127 +15,85 @@ import java.util.List;
 public class ProductRepository {
 
     private static final String TAG = "ProductRepository";
-    private DatabaseHelper dbHelper;
+    private final DatabaseHelper dbHelper;
 
     public ProductRepository(Context context) {
         dbHelper = new DatabaseHelper(context);
     }
 
-
-    public long insertProduct(String name, double price, String condition, String description, double latitude, double longitude, String imageUri, long userId) {
+    // Insert a new product
+    public long insertProduct(Product product) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_NAME, name);
-        values.put(DatabaseHelper.COLUMN_PRICE, price);
-        values.put(DatabaseHelper.COLUMN_CONDITION, condition);
-        values.put(DatabaseHelper.COLUMN_DESCRIPTION, description);
-        values.put(DatabaseHelper.COLUMN_LATITUDE, latitude);
-        values.put(DatabaseHelper.COLUMN_LONGITUDE, longitude);
-        values.put(DatabaseHelper.COLUMN_IMAGE_URI, imageUri);
-        values.put(DatabaseHelper.COLUMN_USER_ID, userId);
+        values.put(DatabaseHelper.COLUMN_NAME, product.getName());
+        values.put(DatabaseHelper.COLUMN_PRICE, product.getPrice());
+        values.put(DatabaseHelper.COLUMN_CONDITION, product.getCondition());
+        values.put(DatabaseHelper.COLUMN_DESCRIPTION, product.getDescription());
+        values.put(DatabaseHelper.COLUMN_LATITUDE, product.getLatitude());
+        values.put(DatabaseHelper.COLUMN_LONGITUDE, product.getLongitude());
+        values.put(DatabaseHelper.COLUMN_IMAGE_URI, product.getImageUri());
+        values.put(DatabaseHelper.COLUMN_USER_ID, product.getUserId());
 
         long result = -1;
-
         try {
             result = db.insertOrThrow(DatabaseHelper.TABLE_PRODUCTS, null, values);
+            Log.i(TAG, "Product inserted successfully with ID: " + result);
         } catch (SQLException e) {
             Log.e(TAG, "Error inserting product", e);
         } finally {
             db.close();
         }
-
         return result;
     }
 
-    // Get all products method
+    // Retrieve all products
     public List<Product> getAllProducts() {
         List<Product> productList = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(DatabaseHelper.TABLE_PRODUCTS, null, null, null, null, null, null);
 
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                Product product = getProductFromCursor(cursor);
-                productList.add(product);
-            } while (cursor.moveToNext());
+        try (Cursor cursor = db.query(DatabaseHelper.TABLE_PRODUCTS, null, null, null, null, null, null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    Product product = getProductFromCursor(cursor);
+                    productList.add(product);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error retrieving products", e);
+        } finally {
+            db.close();
         }
 
-        if (cursor != null) {
-            cursor.close();
-        }
-        db.close();
         return productList;
     }
 
-    // Get products by user ID
-    public List<Product> getProductsByUser(long userId) {
-        List<Product> productList = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String selection = DatabaseHelper.COLUMN_USER_ID + "=?";
-        String[] selectionArgs = {String.valueOf(userId)};
-
-        Cursor cursor = db.query(DatabaseHelper.TABLE_PRODUCTS, null, selection, selectionArgs, null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                Product product = getProductFromCursor(cursor);
-                productList.add(product);
-            } while (cursor.moveToNext());
-        }
-
-        if (cursor != null) {
-            cursor.close();
-        }
-        db.close();
-        return productList;
+    // Helper to parse product data from the cursor
+    private Product getProductFromCursor(Cursor cursor) {
+        return new Product(
+                cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_ID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_NAME)),
+                cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PRICE)),
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_CONDITION)),
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_DESCRIPTION)),
+                cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_LATITUDE)),
+                cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_LONGITUDE)),
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_IMAGE_URI)),
+                cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_USER_ID))
+        );
     }
 
-    // Update product method
-    public boolean updateProduct(long productId, String name, double price, String condition, String description, double latitude, double longitude, String imageUri) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_NAME, name);
-        values.put(DatabaseHelper.COLUMN_PRICE, price);
-        values.put(DatabaseHelper.COLUMN_CONDITION, condition);
-        values.put(DatabaseHelper.COLUMN_DESCRIPTION, description);
-        values.put(DatabaseHelper.COLUMN_LATITUDE, latitude);
-        values.put(DatabaseHelper.COLUMN_LONGITUDE, longitude);
-        values.put(DatabaseHelper.COLUMN_IMAGE_URI, imageUri);
-
-        String selection = DatabaseHelper.COLUMN_ID + "=?";
-        String[] selectionArgs = {String.valueOf(productId)};
-
-        int rowsAffected = db.update(DatabaseHelper.TABLE_PRODUCTS, values, selection, selectionArgs);
-        db.close();
-
-        return rowsAffected > 0;
-    }
-
-    // Delete product method
+    // Delete a product by ID
     public boolean deleteProduct(long productId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        String selection = DatabaseHelper.COLUMN_ID + "=?";
-        String[] selectionArgs = {String.valueOf(productId)};
-
-        int rowsDeleted = db.delete(DatabaseHelper.TABLE_PRODUCTS, selection, selectionArgs);
-        db.close();
-
+        int rowsDeleted = 0;
+        try {
+            rowsDeleted = db.delete(DatabaseHelper.TABLE_PRODUCTS, DatabaseHelper.COLUMN_ID + "=?", new String[]{String.valueOf(productId)});
+            Log.i(TAG, "Rows deleted: " + rowsDeleted);
+        } catch (Exception e) {
+            Log.e(TAG, "Error deleting product", e);
+        } finally {
+            db.close();
+        }
         return rowsDeleted > 0;
-    }
-
-    // Helper method to create a Product object from a cursor
-    private Product getProductFromCursor(Cursor cursor) {
-        String name = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_NAME));
-        double price = cursor.getDouble(cursor.getColumnIndex(DatabaseHelper.COLUMN_PRICE));
-        String condition = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_CONDITION));
-        String description = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_DESCRIPTION));
-        double latitude = cursor.getDouble(cursor.getColumnIndex(DatabaseHelper.COLUMN_LATITUDE));
-        double longitude = cursor.getDouble(cursor.getColumnIndex(DatabaseHelper.COLUMN_LONGITUDE));
-        String imageUri = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_IMAGE_URI));
-        long userId = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COLUMN_USER_ID));
-
-        return new Product(name, price, condition, description, latitude, longitude, imageUri, userId);
     }
 }

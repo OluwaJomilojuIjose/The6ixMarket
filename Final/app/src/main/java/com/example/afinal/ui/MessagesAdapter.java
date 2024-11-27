@@ -15,7 +15,7 @@ import java.util.List;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder> {
 
-    private List<Message> messageList;
+    private final List<Message> messageList;
 
     public MessagesAdapter(List<Message> messageList) {
         this.messageList = messageList;
@@ -31,9 +31,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         Message message = messageList.get(position);
-        holder.senderName.setText(message.getSenderName());
-        holder.messageContent.setText(message.getMessageContent());
+        holder.senderName.setText(message.getSenderName()); // Fixed
+        holder.messageContent.setText(message.getMessageContent()); // Fixed
     }
+
 
     @Override
     public int getItemCount() {
@@ -41,7 +42,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     }
 
     static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView senderName, messageContent;
+        final TextView senderName, messageContent;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);

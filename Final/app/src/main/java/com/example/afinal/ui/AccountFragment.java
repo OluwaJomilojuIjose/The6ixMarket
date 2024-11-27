@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -23,15 +22,14 @@ public class AccountFragment extends Fragment {
     private EditText editTextUsername, editTextEmail, editTextPhone;
     private RadioGroup radioGroupUserType;
     private UserRepository userRepository;
-    private long userId = 1;
+    private long userId = 1; // Mock user ID; replace with actual user ID from login
 
     public AccountFragment() {
-
+        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         // Initialize views
@@ -41,8 +39,9 @@ public class AccountFragment extends Fragment {
         radioGroupUserType = view.findViewById(R.id.radioGroupUserType);
         Button saveButton = view.findViewById(R.id.buttonSave);
 
+        // Initialize repository
         try {
-            userRepository = new UserRepository(getContext());
+            userRepository = new UserRepository(requireContext());
         } catch (Exception e) {
             Log.e(TAG, "Failed to initialize UserRepository", e);
             Toast.makeText(getContext(), "Failed to initialize the database. Please restart the app.", Toast.LENGTH_SHORT).show();
@@ -51,7 +50,6 @@ public class AccountFragment extends Fragment {
 
         // Load existing user information
         loadUserInformation();
-
 
         saveButton.setOnClickListener(v -> saveUserInformation());
 
@@ -74,12 +72,19 @@ public class AccountFragment extends Fragment {
     }
 
     private void saveUserInformation() {
-        String username = editTextUsername.getText().toString();
-        String email = editTextEmail.getText().toString();
-        String phone = editTextPhone.getText().toString();
+        String username = editTextUsername.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
+        String phone = editTextPhone.getText().toString().trim();
         String userType = (radioGroupUserType.getCheckedRadioButtonId() == R.id.radioButtonBuyer) ? "buyer" : "seller";
 
-        long result = userRepository.insertUser(username, email, phone, userType);
+        if (username.isEmpty() || email.isEmpty()) {
+            Toast.makeText(getContext(), "Username and email are required.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User user = new User(userId, username, email, phone, userType);
+        long result = userRepository.insertUser(user);
+
         if (result != -1) {
             Toast.makeText(getContext(), "User information saved successfully.", Toast.LENGTH_SHORT).show();
         } else {

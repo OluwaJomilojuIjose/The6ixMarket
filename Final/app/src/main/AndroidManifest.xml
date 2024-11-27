@@ -18,6 +18,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAslXK5eArz7_nGUqewCcRENLRjrr2WnNE" />
 
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -28,36 +29,40 @@
             </intent-filter>
         </activity>
 
-        <!-- Added AccountManagementActivity -->
+        <!-- AccountManagementActivity -->
         <activity
             android:name=".ui.AccountManagementActivity"
             android:exported="true" />
 
-        <!-- Added MarketManagementActivity -->
+        <!-- MarketManagementActivity -->
         <activity
             android:name=".ui.MarketManagementActivity"
             android:exported="true" />
 
-        <!-- Added ManageListingsActivity -->
+        <!-- ManageListingsActivity -->
         <activity
             android:name=".ui.ManageListingsActivity"
             android:exported="true" />
 
-        <!-- Added SavedListingsActivity -->
+        <!-- SavedListingsActivity -->
         <activity
             android:name=".ui.SavedListingsActivity"
             android:exported="true" />
 
-        <!-- Added PurchasedListingsActivity -->
+        <!-- PurchasedListingsActivity -->
         <activity
             android:name=".ui.PurchasedListingsActivity"
             android:exported="true" />
 
-        <!-- Added AddEditListingActivity -->
+        <!-- AddEditListingActivity -->
         <activity
             android:name=".ui.AddEditListingActivity"
             android:exported="true" />
 
+        <!-- ExploreListingsActivity -->
+        <activity
+            android:name=".ui.ExploreListingsActivity"
+            android:exported="true" />
     </application>
 
     <!-- Permissions -->
@@ -65,5 +70,4 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
 </manifest>

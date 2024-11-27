@@ -37,10 +37,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productPrice.setText(String.format("$%.2f", product.getPrice()));
         holder.productCondition.setText(product.getCondition());
 
-        // Load product image
+        // Load product image using Glide
         Glide.with(holder.itemView.getContext())
                 .load(product.getImageUri())
                 .placeholder(R.drawable.ic_placeholder_image)
+                .error(R.drawable.ic_error_image)
                 .into(holder.productImage);
     }
 
@@ -55,8 +56,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     static class ProductViewHolder extends RecyclerView.ViewHolder {
-        TextView productName, productPrice, productCondition;
-        ImageView productImage;
+        final TextView productName, productPrice, productCondition;
+        final ImageView productImage;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);

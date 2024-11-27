@@ -1,19 +1,43 @@
-<!-- Update to include buttons for account management, listings, and market management -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Welcome Message -->
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to The 6ix Market!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="24dp" />
+
+    <!-- Account Management Button -->
     <Button
         android:id="@+id/buttonAccountManagement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Account Management" />
+        android:text="Account Management"
+        android:layout_marginBottom="16dp" />
 
+    <!-- Market Management Button -->
     <Button
         android:id="@+id/buttonMarketManagement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Market Management" />
+        android:text="Market Management"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Explore Listings Button -->
+    <Button
+        android:id="@+id/buttonExploreListings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Explore Listings"
+        android:layout_marginBottom="16dp" />
+
+
 </LinearLayout>

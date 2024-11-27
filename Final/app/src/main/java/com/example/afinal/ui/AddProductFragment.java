@@ -22,10 +22,10 @@ import androidx.navigation.Navigation;
 import com.bumptech.glide.Glide;
 import com.example.afinal.R;
 import com.example.afinal.database.ProductRepository;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
+import com.example.afinal.model.Product;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 
 public class AddProductFragment extends Fragment implements OnMapReadyCallback {
 
@@ -37,11 +37,11 @@ public class AddProductFragment extends Fragment implements OnMapReadyCallback {
     private Uri imageUri;
     private ProductRepository productRepository;
 
-    private double selectedLatitude = 43.65107; // Default to Toronto, ON, Canada
+    private double selectedLatitude = 43.65107; // Default: Toronto, ON
     private double selectedLongitude = -79.347015;
 
     public AddProductFragment() {
-        // Required empty public constructor
+        // Required empty constructor
     }
 
     @Nullable
@@ -51,10 +51,10 @@ public class AddProductFragment extends Fragment implements OnMapReadyCallback {
 
         // Initialize repository
         try {
-            productRepository = new ProductRepository(getContext());
+            productRepository = new ProductRepository(requireContext());
         } catch (Exception e) {
             Log.e(TAG, "Failed to initialize ProductRepository", e);
-            Toast.makeText(getContext(), "Failed to initialize the database. Please restart the app.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Database initialization failed. Please restart the app.", Toast.LENGTH_SHORT).show();
             return view;
         }
 
@@ -67,7 +67,7 @@ public class AddProductFragment extends Fragment implements OnMapReadyCallback {
         Button selectImageButton = view.findViewById(R.id.button_select_image);
         Button addProductButton = view.findViewById(R.id.button_add_product);
 
-        // Set up map fragment
+        // Map setup
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
@@ -75,10 +75,8 @@ public class AddProductFragment extends Fragment implements OnMapReadyCallback {
             Log.e(TAG, "Map fragment is null");
         }
 
-        // Set onClickListener for selecting an image
-        selectImageButton.setOnClickListener(v -> openImageChooser());
-
-        // Set onClickListener for adding the product to the database
+        // Button listeners
+        selectImageButton.setOnClickListener(v -> openImagePicker());
         addProductButton.setOnClickListener(v -> {
             if (validateInputs()) {
                 addProductToDatabase(view);
@@ -88,8 +86,7 @@ public class AddProductFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
-    // Open image chooser to pick a product image
-    private void openImageChooser() {
+    private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
@@ -100,19 +97,19 @@ public class AddProductFragment extends Fragment implements OnMapReadyCallback {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == getActivity().RESULT_OK && data != null) {
             imageUri = data.getData();
             loadImagePreview();
+        } else {
+            Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // Load selected image using Glide
     private void loadImagePreview() {
         Glide.with(this)
                 .load(imageUri)
-                .placeholder(R.drawable.ic_placeholder_image) // Placeholder image
-                .error(R.drawable.ic_error_image) // Error image in case of a failure
+                .placeholder(R.drawable.ic_placeholder_image)
+                .error(R.drawable.ic_error_image)
                 .into(productImage);
     }
 
-    // Validate the input fields
     private boolean validateInputs() {
         String name = productName.getText().toString().trim();
         String condition = productCondition.getText().toString().trim();
@@ -126,7 +123,7 @@ public class AddProductFragment extends Fragment implements OnMapReadyCallback {
         }
 
         try {
-            Double.parseDouble(priceStr); // Check if price is a valid double
+            Double.parseDouble(priceStr); // Validate price format
         } catch (NumberFormatException e) {
             Toast.makeText(getContext(), "Invalid price value", Toast.LENGTH_SHORT).show();
             return false;
@@ -135,23 +132,20 @@ public class AddProductFragment extends Fragment implements OnMapReadyCallback {
         return true;
     }
 
-    // Add product to the database
     private void addProductToDatabase(View view) {
         String name = productName.getText().toString().trim();
         String condition = productCondition.getText().toString().trim();
         String description = productDescription.getText().toString().trim();
         double price = Double.parseDouble(productPrice.getText().toString().trim());
-        long userId = 1;
+        long userId = 1; // Mock user ID; replace with actual logged-in user ID
 
-        long result = productRepository.insertProduct(name, price, condition, description, selectedLatitude, selectedLongitude, imageUri.toString(), userId);
+        long result = productRepository.insertProduct(new Product(name, price, condition, description, selectedLatitude, selectedLongitude, imageUri.toString(), userId));
 
         if (result != -1) {
             Toast.makeText(getContext(), "Product added successfully", Toast.LENGTH_SHORT).show();
-            // Navigate back to HomeFragment after adding the product
             Navigation.findNavController(view).navigate(R.id.action_addProductFragment_to_homeFragment);
         } else {
             Toast.makeText(getContext(), "Failed to add product. Please try again.", Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "Failed to insert product into the database");
         }
     }
 
