@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,7 +26,7 @@ public class CreateListingActivity extends AppCompatActivity {
 
     private EditText titleEditText, priceEditText, descriptionEditText, countryEditText, postalCodeEditText;
     private ImageView listingImageView;
-    private Button saveButton;
+    private Button saveButton, backButton;
     private Uri selectedImageUri;
     private DatabaseHelper databaseHelper;
     private ActivityResultLauncher<String[]> galleryLauncher;
@@ -43,6 +44,7 @@ public class CreateListingActivity extends AppCompatActivity {
         postalCodeEditText = findViewById(R.id.postal_code_edit_text);
         listingImageView = findViewById(R.id.listing_image_view);
         saveButton = findViewById(R.id.save_listing_button);
+        backButton = findViewById(R.id.back_button);
 
         databaseHelper = new DatabaseHelper(this);
 
@@ -105,6 +107,13 @@ public class CreateListingActivity extends AppCompatActivity {
                 Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
             } else {
                 saveListing(title, price, selectedImageUri.toString(), description, country, postalCode);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
